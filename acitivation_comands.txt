@@ -1,0 +1,11 @@
+python -m venv venv-------создание виртуального окружения
+venv\Scripts\activate------активация и вход в виртуальное окружениеъ
+pip install django------установка джанго
+django-admin startproject config .--------------создание основго конфига джанго
+python manage.py startapp main--------создает папку main  в которой вся логика БД и файлы HTML
+python manage.py makemigrations--------джанго их читает и делает план создания БД
+python manage.py migrate-------создает БД и делает таблицу
+python manage.py createsuperuser-----------создает юзера для админки
+python manage.py runserver-------запуск локального сервера
+pip freeze > requirements.txt------создания файла с зависимостями и библиотеками
+pip install -r requirements.txt------установка зависимотсей и библиотек 

@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Путеводитель — {{ city.name }}{% endblock %}
+
+{% block content %}
+<div class="city-detail">
+    <a href="{% url 'home' %}"><button type="button" class="back-btn">← Назад</button></a>
+
+    <div class="city-detail-hero" style="background-image: url('{{ city.image_url|default:'https://images.unsplash.com/photo-1527269534026-c86f4009eace' }}'); background-size: cover; background-position: center;">
+        <div class="city-detail-hero-overlay"></div>
+        <div class="city-detail-hero-text">
+            <span class="city-detail-region">{{ city.region }}</span>
+            <h1 class="city-detail-title">{{ city.name }}</h1>
+            <p class="city-detail-tagline">{{ city.tagline }}</p>
+        </div>
+    </div>
+
+    <div class="city-detail-grid">
+        <div class="city-about">
+            <h2>О городе</h2>
+            <p class="city-about-text">{{ city.description }}</p>
+            <div class="city-facts">
+                <div><dt>Население</dt><dd>{{ city.population }}</dd></div>
+                <div><dt>Лучшее время</dt><dd>{{ city.best_time }}</dd></div>
+            </div>
+        </div>
+
+        <div class="city-places">
+            <h2>Интересные места</h2>
+            <div class="places-grid">
+                {% for place in places %}
+                <div class="place-card">
+                    <div class="place-card-image-wrap">
+                        <img src="{{ place.image_url|default:'https://images.unsplash.com/photo-1563693906411-ed91a0c79e60' }}" style="width:100%; height:100%; object-fit:cover;">
+                        <span class="place-tag place-tag--{{ place.category }}">{{ place.get_category_display }}</span>
+                    </div>
+                    <div class="place-card-body">
+                        <h3 class="place-card-name">{{ place.name }}</h3>
+                        <p class="place-card-desc">{{ place.description }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>Мест пока нет. Добавьте их в админке!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Главная — Путеводитель по Азербайджану{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Исследуй страну огней</p>
+            <h1 class="hero-title">Удивительный <em>Азербайджан</em></h1>
+            <p class="hero-desc">Откройте для себя величие Баку, прохладу Шахдага, древность Шеки и красоту других регионов.</p>
+        </div>
+    </section>
+
+    <section class="cities-section">
+        <div class="section-head">
+            <h2>Города и Регионы</h2>
+            <p>Данные загружаются из твоей базы данных SQLite</p>
+        </div>
+
+        <div class="cities-grid">
+            {% for city in cities %}
+            <div class="city-card" style="--city-accent: {{ city.accent|default:'#00afca' }};">
+                <div class="city-card-image-wrap">
+                    {% if city.image_url %}
+                        <img src="{{ city.image_url }}" class="city-card-image" alt="{{ city.name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1527269534026-c86f4009eace" class="city-card-image" alt="Фото">
+                    {% endif %}
+                    <div class="city-card-overlay"></div>
+                    <span class="city-card-region">{{ city.region }}</span>
+                </div>
+                
+                <div class="city-card-body">
+                    <h3 class="city-card-name">{{ city.name }}</h3>
+                    <p class="city-card-tagline">{{ city.tagline }}</p>
+                    <p class="city-card-preview">{{ city.description|truncatewords:15 }}</p>
+                    
+                    <div class="city-card-meta">
+                        <span>Население: {{ city.population }}</span>
+                        <span>Время: {{ city.best_time }}</span>
+                    </div>
+                    
+                    <a href="{% url 'city_detail' city.id %}" style="text-decoration: none; margin-top: auto;">
+                        <button type="button" class="city-card-btn">Подробнее</button>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-state">В базе данных пока нет городов. Зайди в админку, чтобы добавить первый!</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
