@@ -65,4 +65,3 @@ def city_detail_page(request, city_id):
     """Логика Страницы города: берем один город по его ID и все его места"""
     city = get_object_or_404(City, id=city_id)
     places = city.places.all()
-    return render(request, 'main/city_detail.html', {'city': city, 'places': places})

@@ -1,0 +1,138 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в личный кабинет | Azerbaijan Travel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #262626;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 25px;
+            color: #ff9f43;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b3b3b3;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #404040;
+            background-color: #333333;
+            color: #ffffff;
+            box-sizing: border-box;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff9f43;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #e08528;
+        }
+        .divider {
+            margin: 20px 0;
+            color: #666;
+            position: relative;
+        }
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: background 0.3s;
+        }
+        .btn-google:hover {
+            background-color: #e6e6e6;
+        }
+        .btn-google img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .links a {
+            color: #ff9f43;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Azerbaijan Travel</h2>
+    
+    <form method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        
+        <button type="submit" class="btn-submit">Войти</button>
+    </form>
+
+    <div class="divider">или</div>
+
+    <a href="{% provider_login_url 'google' %}" class="btn-google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
+        Войти через Google
+    </a>
+
+    <div class="links">
+        <p>Нет аккаунта? <a href="{% url 'account_signup' %}">Зарегистрироваться</a></p>
+    </div>
+</div>
+
+</body>
+</html>

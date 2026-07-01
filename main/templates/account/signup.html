@@ -1,0 +1,194 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Azerbaijan Travel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background: #222222; 
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 440px;
+            box-sizing: border-box;
+            border: 1px solid #2d2d2d;
+        }
+        .signup-container h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #ff9838; 
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        /* Стилизация полей формы Django */
+        .signup-container form p {
+            margin-bottom: 18px;
+            color: #aeaeae;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        .signup-container form input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            background-color: #333333; 
+            border: 1px solid #444444;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #ffffff;
+            transition: border-color 0.2s;
+        }
+        .signup-container form input:focus {
+            border-color: #ff9838;
+            outline: none;
+        }
+        
+        /* ИСПРАВЛЕНИЕ: Делаем весь вспомогательный текст и списки требований к паролю светлыми */
+        .signup-container form .helptext, 
+        .signup-container form ul,
+        .signup-container form li {
+            display: block;
+            font-size: 12px;
+            color: #b0b0b0 !important; /* Светло-серый цвет текста требований */
+            margin-top: 6px;
+            line-height: 1.4;
+            list-style: none;
+            padding-left: 0;
+        }
+        .signup-container form li {
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 12px;
+        }
+        /* Маленькая оранжевая точка перед каждым правилом для красоты */
+        .signup-container form li::before {
+            content: "•";
+            color: #ff9838;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .signup-container .errorlist {
+            color: #ff4a4a;
+            font-size: 13px;
+            padding-left: 0;
+            list-style: none;
+            margin: 0 0 10px 0;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #ff9838; 
+            color: #121212;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #e0812b;
+        }
+        .divider {
+            text-align: center;
+            margin: 22px 0;
+            position: relative;
+            color: #777777;
+            font-size: 13px;
+            text-transform: lowercase;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #444444;
+        }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            color: #121212;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .google-btn:hover {
+            background-color: #e5e5e5;
+        }
+        .google-btn img {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            display: block;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #aeaeae;
+        }
+        .footer-text a {
+            color: #ff9838;
+            text-decoration: none;
+        }
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Azerbaijan Travel</h2>
+    
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-submit">Зарегистрироваться</button>
+    </form>
+
+    <div class="divider">или</div>
+
+    <a href="{% provider_login_url 'google' %}" class="google-btn">
+        <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google">
+        Войти через Google
+    </a>
+
+    <div class="footer-text">
+        Уже есть аккаунт? <a href="{% url 'account_login' %}">Войти</a>
+    </div>
+</div>
+
+</body>
+</html>

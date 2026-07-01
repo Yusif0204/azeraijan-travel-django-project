@@ -58,6 +58,7 @@ body {
   background: rgba(10, 14, 20, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  
 }
 
 .logo {
